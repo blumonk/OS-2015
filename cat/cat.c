@@ -1,11 +1,10 @@
-#include <stdio.h>
-#include <unistd.h> 
 #include "helpers.h"
+#include <stdio.h>
 
 int main()
 {
 	char buffer[512];
-	int bytes_count = 0;
+	ssize_t bytes_count = 0;
 	while ((bytes_count = read_(STDIN_FILENO, buffer, 512)) > 0)
 	{
 		if (bytes_count < 0)
