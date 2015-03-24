@@ -66,5 +66,6 @@ int spawn(const char *file, char *const argv[])
 			return -1;
 	} else {
 		execvp(file, argv);
-	}	
+		exit(EXIT_FAILURE);
+	}
 }
