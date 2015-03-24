@@ -10,12 +10,12 @@ int main()
 		if (bytes_count < 0)
 		{
 			perror("Error while reading");
-			return 0;
+			exit(EXIT_FAILURE);
 		}
 		if (write_(STDOUT_FILENO, buffer, bytes_count) < 0)
 		{
 			perror("Error while writing");
-			return 0;
+			exit(EXIT_FAILURE);
 		}
 	}
 

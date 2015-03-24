@@ -36,20 +36,24 @@ int main()
 		while ((delim_offset = find_delim(buffer + start, count - start, DELIM)) != -1)
 		{
 			reverse(buffer + start, delim_offset);
-			if (write_(STDOUT_FILENO, buffer + start, delim_offset + 1) < 0)
+			if (write_(STDOUT_FILENO, buffer + start, delim_offset + 1) < 0) {
 				perror("Error while writing");
+				exit(EXIT_FAILURE);
+			}
 			start += delim_offset + 1;
 		}
 		memmove(buffer, buffer + start, count - start);
 		offset = count - start;
 	}
-	if (count < 0)
+	if (count < 0) {
 		perror("Error while reading");
+		exit(EXIT_FAILURE);
+	}
 	reverse(buffer, offset);
-	if (write_(STDOUT_FILENO, buffer, offset) < 0)
+	if (write_(STDOUT_FILENO, buffer, offset) < 0) {
 		perror("Error while writing");
+		exit(EXIT_FAILURE);
+	}
 
 	return 0;
 }
-
-

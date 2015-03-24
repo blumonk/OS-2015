@@ -50,3 +50,21 @@ ssize_t read_until(int fd, void *buf, size_t count, char delimiter)
 	}
 	return result;
 }
+
+int spawn(const char *file, char *const argv[]) 
+{
+	pid_t cpid = fork();
+	if (cpid == -1)
+		return -1;
+	int status;
+	if (cpid) {
+		if (waitpid(cpid, &status, 0) == -1)
+			return -1;
+		if (WIFEXITED(status))
+			return WEXITSTATUS(status);
+		else 
+			return -1;
+	} else {
+		execvp(file, argv);
+	}	
+}
