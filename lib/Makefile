@@ -1,4 +1,11 @@
-all: helpers.c helpers.h
-	gcc -std=c99 -fPIC -Wall -shared helpers.c -o libhelpers.so
+OBJS = bufio.c bufio.h 
+CC = gcc
+DEBUG = -g
+CFLAGS = -Wall -std=c99 -fPIC -shared $(DEBUG)
+
+all: libbufio.so
+
+libbufio.so: $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o libbufio.so
 clean:
 	rm -f *.so
